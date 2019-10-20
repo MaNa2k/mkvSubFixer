@@ -22,6 +22,8 @@ It depends on the ffmpeg.exe file.
 ## Feuture plans
 - Automatically embedding .srt inside .mkv
 
-- multithreded conversion prosessing
+- multithreded conversion prosessing.
 
-- Better GUI style
+- Better GUI style.
+
+- Better readme, with screenshots.
