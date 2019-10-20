@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mkvSubFixer", "mkvSubFixer\mkvSubFixer.csproj", "{7F26D2F0-3B53-43A1-9245-7E1316EBE056}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F26D2F0-3B53-43A1-9245-7E1316EBE056}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F26D2F0-3B53-43A1-9245-7E1316EBE056}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F26D2F0-3B53-43A1-9245-7E1316EBE056}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F26D2F0-3B53-43A1-9245-7E1316EBE056}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0950CE8D-8DA6-44A4-BCE6-D01FF3657BE6}
+	EndGlobalSection
+EndGlobal
