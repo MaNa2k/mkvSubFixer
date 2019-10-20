@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -62,22 +61,17 @@ namespace mkvSubFixer
 
         private void RemoveDuplicateItems()
         {
-            ItemCollection ic = dgItems.Items;
-
-            List<GridColumns> x = dgItems.Items.Cast<GridColumns>()
-                                               .GroupBy(x => x.name)
-                                               .SelectMany(x => x.Take(1))
-                                               .OrderByDescending(x => x.name)
-                                               .ToList();
-
+            List<GridColumns> dgItems_grouped = dgItems.Items.Cast<GridColumns>()
+                                                             .GroupBy(x => x.name)
+                                                             .SelectMany(x => x.Take(1))
+                                                             .OrderByDescending(x => x.name)
+                                                             .ToList();
             dgItems.Items.Clear();
 
-            foreach (var i in x)
+            foreach (var i in dgItems_grouped)
             {
                 dgItems.Items.Add(new GridColumns { name = i.name });
             }
-
-
         }
 
         private void dgItems_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
@@ -101,9 +95,11 @@ namespace mkvSubFixer
 
         private void StartExtractionProcess_Click(object sender, RoutedEventArgs e)
         {
+            
+
             if (dgItems.Items.Count == 0)
             {
-                MessageBox.Show("No items selected for processing");
+                MessageBox.Show("No items for processing");
                 return;
             }
 
@@ -112,24 +108,31 @@ namespace mkvSubFixer
                 MessageBox.Show("Can not find ffmpeg.exe converter");
                 return;
             }
+            int progress = 0;
+
+            var proc = new Process();
 
             foreach (GridColumns gc in dgItems.Items)
             {
+                //progressLabel.Content = progress++.ToString() + "%";
+
                 var fileNamePath = gc.name;
                 var fileDir = Path.GetDirectoryName(gc.name);
                 var fileNameNoExt = Path.GetFileNameWithoutExtension(gc.name);
                 var subtitleFileNamePathExt = fileDir + "\\" + fileNameNoExt + ".srt";
                 var ffmpegPath = "ffmpeg.exe";
 
-
-                var proc = new Process();
                 proc.StartInfo.FileName = ffmpegPath;
-                proc.StartInfo.Arguments = "-y -i \"" + fileNamePath + "\" -map 0:s:0 \"" + subtitleFileNamePathExt + "\"";
+                proc.StartInfo.Arguments = "-n -i \"" + fileNamePath + "\" -map 0:s:0 \"" + subtitleFileNamePathExt + "\"";
+                
+                // proc.StartInfo.CreateNoWindow = true;
+
                 proc.Start();
                 proc.WaitForExit();
-                var exitCode = proc.ExitCode;
                 proc.Close();
             }
+
+      
         }
 
         private void dgItems_Drop(object sender, DragEventArgs e)
@@ -150,10 +153,37 @@ namespace mkvSubFixer
 
         private void AddFilesToGrid(string[] droppedFiles)
         {
-            foreach (var item in droppedFiles)
+            if (droppedFiles.Length == 0) {  return; }
+
+            // single files
+            foreach (var i in droppedFiles)
             {
-                
+                FileAttributes attr = File.GetAttributes(i);
+
+                if ((attr & FileAttributes.Directory) != FileAttributes.Directory)
+                {
+                    dgItems.Items.Add(new GridColumns { name = i });
+                }
             }
+
+            // files under dir and sub dir
+            foreach (var i in droppedFiles)
+            {
+                FileAttributes attr = File.GetAttributes(i);
+
+                if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
+                {
+                    string[] allfiles = Directory.GetFiles(i, "*.mkv*", SearchOption.AllDirectories);
+
+                    foreach (var y in allfiles)
+                    {
+                        dgItems.Items.Add(new GridColumns { name = y });
+                    }
+
+                }
+            }
+
+            RemoveDuplicateItems();
         }
     }
 }

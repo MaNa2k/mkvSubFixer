@@ -5,13 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mkvSubFixer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MKV Subtitle Extractor and Converter" Height="366" Width="795">
     <Grid x:Name="Browse">
-        <Button x:Name="FileBrowse" Content="Browse" HorizontalAlignment="Left" Margin="45,57,0,0" VerticalAlignment="Top" Click="FileBrowse_Click" Width="80" RenderTransformOrigin="-0.878,0.647"/>
-        <DataGrid x:Name="dgItems" AllowDrop="True" DragDrop.Drop="dgItems_Drop" BeginningEdit="dgItems_BeginningEdit" Margin="45,82,43,40" GridLinesVisibility="None"/>
-        <Button x:Name="StartProcess" Content="Start Extraction" HorizontalAlignment="Left" Margin="321,57,0,0" VerticalAlignment="Top" Width="93" Click="StartExtractionProcess_Click"/>
-        <Button x:Name="DeleteItems" Content="Delete Selected Items" HorizontalAlignment="Left" Margin="622,57,0,0" VerticalAlignment="Top" Click="DeleteItems_Click"/>
-        <Label Content="Descriptions: Extracts .ssa \ .ass subs from .mkv video, converts them to seperate .srt files." HorizontalAlignment="Left" Margin="45,0,0,0" VerticalAlignment="Top" Width="488"/>
-        <StackPanel/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="49*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="FileBrowse" Content="Browse" HorizontalAlignment="Left" Margin="29,57,0,0" VerticalAlignment="Top" Click="FileBrowse_Click" Width="80" RenderTransformOrigin="-0.878,0.647" Grid.Column="1"/>
+        <DataGrid x:Name="dgItems" AllowDrop="True" DragDrop.Drop="dgItems_Drop" BeginningEdit="dgItems_BeginningEdit" Margin="29,82,43,57" GridLinesVisibility="None" Grid.Column="1"/>
+        <Button x:Name="StartProcess" Content="Start Extraction" HorizontalAlignment="Left" Margin="255,57,0,0" VerticalAlignment="Top" Width="101" Click="StartExtractionProcess_Click" Grid.Column="1"/>
+        <Button x:Name="DeleteItems" Content="Delete Selected Items" HorizontalAlignment="Left" Margin="114,57,0,0" VerticalAlignment="Top" Click="DeleteItems_Click" Grid.Column="1" Width="136"/>
+        <Label Content="Descriptions: Extracts .ssa \ .ass subs from .mkv videos, converts them to seperate .srt files." HorizontalAlignment="Left" Margin="29,0,0,0" VerticalAlignment="Top" Width="488" Grid.Column="1"/>
     </Grid>
 </Window>
