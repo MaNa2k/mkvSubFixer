@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -14,36 +15,37 @@ namespace mkvSubFixer
     /// </summary>
     public partial class MainWindow : Window
     {
-        public int counter { get; set; } = 1;
-        public MainWindow()
-        {
-            InitializeComponent();
-
-            DataGridTextColumn col1 = new DataGridTextColumn();
-            DataGridTextColumn col2 = new DataGridTextColumn();
-
-            dgItems.Columns.Add(col1);
-            dgItems.Columns.Add(col2);
-
-            col1.Binding = new Binding("count");
-            col2.Binding = new Binding("name");
-
-            col1.Header = "Count";
-            col2.Header = "Name";
-        }
 
         public class GridColumns
         {
-            public int count { get; set; }
             public string name { get; set; }
         }
 
+        public MainWindow()
+        {
+            InitializeComponent();
+            InitDataGrid();
+        }
+
+        private void InitDataGrid()
+        {
+            DataGridTextColumn col1 = new DataGridTextColumn();
+
+            dgItems.Columns.Add(col1);
+
+            col1.Binding = new Binding("name");
+
+            col1.Header = "Name";
+        }
+
+
         private void FileBrowse_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            openFileDialog.Filter = "Matroska Files (*.mkv)|*.mkv";
-            openFileDialog.Multiselect = true;
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Matroska Files (*.mkv)|*.mkv",
+                Multiselect = true
+            };
 
             if (openFileDialog.ShowDialog() == true)
             {
@@ -51,9 +53,31 @@ namespace mkvSubFixer
 
                 foreach (var item in z)
                 {
-                    dgItems.Items.Add(new GridColumns { count = counter++, name = item });
+                    dgItems.Items.Add(new GridColumns { name = item });
                 }
             }
+
+            RemoveDuplicateItems();
+        }
+
+        private void RemoveDuplicateItems()
+        {
+            ItemCollection ic = dgItems.Items;
+
+            List<GridColumns> x = dgItems.Items.Cast<GridColumns>()
+                                               .GroupBy(x => x.name)
+                                               .SelectMany(x => x.Take(1))
+                                               .OrderByDescending(x => x.name)
+                                               .ToList();
+
+            dgItems.Items.Clear();
+
+            foreach (var i in x)
+            {
+                dgItems.Items.Add(new GridColumns { name = i.name });
+            }
+
+
         }
 
         private void dgItems_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)

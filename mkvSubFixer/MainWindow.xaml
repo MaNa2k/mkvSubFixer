@@ -12,5 +12,6 @@
         <Button x:Name="StartProcess" Content="Start Extraction" HorizontalAlignment="Left" Margin="321,57,0,0" VerticalAlignment="Top" Width="93" Click="StartExtractionProcess_Click"/>
         <Button x:Name="DeleteItems" Content="Delete Selected Items" HorizontalAlignment="Left" Margin="622,57,0,0" VerticalAlignment="Top" Click="DeleteItems_Click"/>
         <Label Content="Descriptions: Extracts .ssa \ .ass subs from .mkv video, converts them to seperate .srt files." HorizontalAlignment="Left" Margin="45,0,0,0" VerticalAlignment="Top" Width="488"/>
+        <StackPanel/>
     </Grid>
 </Window>
