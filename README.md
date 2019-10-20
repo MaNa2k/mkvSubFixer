@@ -16,3 +16,12 @@ save the .srt at the same location as the .mkv file.
 The program uses the famous FFmpeg converter to achieve the extraction and conversion process.
 
 It depends on the ffmpeg.exe file.
+
+
+
+## Feuture plans
+- Automatically embedding .srt inside .mkv
+
+- multithreded conversion prosessing
+
+- Better GUI style
