@@ -16,7 +16,7 @@ save the .srt at the same location as the .mkv file.
 ## Dependencies:
 The program uses the famous FFmpeg converter to achieve the extraction and conversion process.
 
-It depends on the ffmpeg.exe file. Get it from here https://www.ffmpeg.org/
+I have included the ffmpeg.exe file in the binaries. You can also get it from here https://www.ffmpeg.org/
 
 
 
