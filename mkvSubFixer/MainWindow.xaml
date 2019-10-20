@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="Browse">
         <Button x:Name="FileBrowse" Content="Browse" HorizontalAlignment="Left" Margin="45,57,0,0" VerticalAlignment="Top" Click="FileBrowse_Click" Width="80" RenderTransformOrigin="-0.878,0.647"/>
-        <DataGrid x:Name="dgItems" BeginningEdit="dgItems_BeginningEdit" Margin="45,82,43,40" GridLinesVisibility="None"/>
+        <DataGrid x:Name="dgItems" AllowDrop="True" DragDrop.Drop="dgItems_Drop" BeginningEdit="dgItems_BeginningEdit" Margin="45,82,43,40" GridLinesVisibility="None"/>
         <Button x:Name="StartProcess" Content="Start Extraction" HorizontalAlignment="Left" Margin="321,57,0,0" VerticalAlignment="Top" Width="93" Click="StartExtractionProcess_Click"/>
         <Button x:Name="DeleteItems" Content="Delete Selected Items" HorizontalAlignment="Left" Margin="622,57,0,0" VerticalAlignment="Top" Click="DeleteItems_Click"/>
         <Label Content="Descriptions: Extracts .ssa \ .ass subs from .mkv video, converts them to seperate .srt files." HorizontalAlignment="Left" Margin="45,0,0,0" VerticalAlignment="Top" Width="488"/>

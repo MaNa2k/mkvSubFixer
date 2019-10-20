@@ -63,7 +63,7 @@ namespace mkvSubFixer
 
         private void DeleteItems_Click(object sender, RoutedEventArgs e)
         {
-            if(dgItems.SelectedItems.Count == 0)
+            if (dgItems.SelectedItems.Count == 0)
             {
                 MessageBox.Show("No items selected");
                 return;
@@ -77,13 +77,13 @@ namespace mkvSubFixer
 
         private void StartExtractionProcess_Click(object sender, RoutedEventArgs e)
         {
-            if (dgItems.Items.Count==0)
+            if (dgItems.Items.Count == 0)
             {
                 MessageBox.Show("No items selected for processing");
-                return; 
+                return;
             }
 
-            if(!File.Exists("ffmpeg.exe"))
+            if (!File.Exists("ffmpeg.exe"))
             {
                 MessageBox.Show("Can not find ffmpeg.exe converter");
                 return;
@@ -108,5 +108,28 @@ namespace mkvSubFixer
             }
         }
 
+        private void dgItems_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] droppedFiles = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                AddFilesToGrid(droppedFiles);
+            }
+            else
+            {
+                MessageBox.Show("No files dropped");
+            }
+
+           
+        }
+
+        private void AddFilesToGrid(string[] droppedFiles)
+        {
+            foreach (var item in droppedFiles)
+            {
+                
+            }
+        }
     }
 }
