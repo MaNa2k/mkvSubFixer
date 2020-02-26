@@ -20,7 +20,7 @@ I have included the ffmpeg.exe with the other binaries. You can get the latest v
 
 
 
-## Feuture plans
+## Future plans
 - Automatically embedding .srt inside .mkv
 
 - multithreded conversion prosessing.
